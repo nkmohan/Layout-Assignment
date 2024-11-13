@@ -1,0 +1,31 @@
+package com.example.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.entity.LayoutAssignment;
+import com.example.repo.LayoutAssignmentRepository;
+
+@Service
+public class LayoutAssignmentServiceimpl {
+	
+	@Autowired
+    private LayoutAssignmentRepository layoutAssignmentRepository;
+
+    public void assignLayout(LayoutAssignmentRequest request) {
+        LayoutAssignment layoutAssignment = new LayoutAssignment();
+        layoutAssignment.setUserId(request.getUserId());
+        layoutAssignment.setGroupId(request.getGroupId());
+        layoutAssignment.setLayoutId(request.getLayoutId());
+        layoutAssignmentRepository.save(layoutAssignment);
+    }
+
+    public void updateLayout(LayoutAssignmentRequest request) {
+        LayoutAssignment layoutAssignment = layoutAssignmentRepository.findByUserId(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("Assignment not found"));
+        layoutAssignment.setLayoutId(request.getLayoutId());
+        layoutAssignmentRepository.save(layoutAssignment);
+    }
+
+
+}

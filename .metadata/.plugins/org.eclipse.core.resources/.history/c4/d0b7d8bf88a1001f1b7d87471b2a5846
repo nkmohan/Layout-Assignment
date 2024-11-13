@@ -1,0 +1,26 @@
+package com.example.layoutservice.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.entity.LayoutAssignment;
+import com.example.repo.LayoutAssignmentRepository;
+import com.example.repo.LayoutRepository;
+
+import ch.qos.logback.core.Layout;
+
+@Service
+public class UserLayoutService {
+    @Autowired
+    private LayoutAssignmentRepository layoutAssignmentRepository;
+
+    @Autowired
+    private LayoutRepository layoutRepository;
+
+    public Layout getUserLayout(Long userId) {
+        Optional<LayoutAssignment> assignment = layoutAssignmentRepository.findByUserId(userId);
+        return assignment.map(a -> layoutRepository.findById(a.getLayoutId()).orElse(null)).orElse(null);
+    }
+}

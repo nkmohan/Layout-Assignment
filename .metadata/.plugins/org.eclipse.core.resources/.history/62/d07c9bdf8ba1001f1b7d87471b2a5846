@@ -1,0 +1,6 @@
+package com.example.service;
+
+public interface LayoutAssignmentService {
+    void assignLayout(LayoutAssignmentRequest request);
+    void updateLayout(LayoutAssignmentRequest request);
+}

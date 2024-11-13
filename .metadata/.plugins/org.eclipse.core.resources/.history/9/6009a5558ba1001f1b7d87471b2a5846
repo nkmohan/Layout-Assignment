@@ -1,0 +1,8 @@
+package com.example.service;
+
+public interface UserService {
+
+	public Users assignLayoutToUser(UserLayout user);
+	public UserLayout updateLayout(UserLayout user);
+	public UserLayout getUserById(Integer userId, Integer groupId);
+}

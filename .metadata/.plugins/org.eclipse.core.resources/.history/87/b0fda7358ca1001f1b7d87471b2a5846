@@ -1,0 +1,45 @@
+package com.example.serviceimpl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.entity.Layouts;
+import com.example.repo.LayoutRepository;
+import com.example.service.LayoutService;
+
+@Service
+public class LayoutServiceImpl implements LayoutService{
+
+	@Autowired
+	private LayoutRepository repo;
+
+	@Override
+	public List<Layouts> getAllLayouts() {
+		
+		return repo.findAll();
+	}
+
+	@Override
+	public Layouts getLayoutById(Integer id) {
+		
+		Optional<Layouts> findById = repo.findById(id);
+		if(findById.isPresent()) {
+			Layouts l = findById.get();
+			return l;
+		}else {
+		return null;
+		}
+	}
+
+	@Override
+	public Layouts saveLayout(Layouts layout) {
+		Layouts save = repo.save(layout);
+		
+		return save;
+	}
+	
+	
+}

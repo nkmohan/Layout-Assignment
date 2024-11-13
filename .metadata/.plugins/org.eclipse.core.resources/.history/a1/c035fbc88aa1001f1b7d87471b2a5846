@@ -1,0 +1,12 @@
+package com.example.service;
+
+import java.util.List;
+
+import com.example.entity.Layouts;
+
+public interface LayoutService {
+
+	public List<Layouts> getAllLayouts();
+	public Layouts getLayoutById(Integer id);
+	public Layouts saveLayout(Layouts layout);
+}

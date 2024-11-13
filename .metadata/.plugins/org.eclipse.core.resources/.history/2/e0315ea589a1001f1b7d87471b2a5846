@@ -1,0 +1,20 @@
+package com.example.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Data;
+
+@Entity
+@Data
+public class Layout {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long layoutId;
+    private String layoutName;
+    private String layoutDescription;
+
+    // Getters and setters
+}

@@ -1,0 +1,45 @@
+package com.example.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.entity.UserLayout;
+import com.example.service.UserService;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+	@Autowired
+	private UserService userService;
+	
+	@PostMapping
+	public ResponseEntity<UserLayout> assign(@RequestBody UserLayout user){
+		UserLayout assignLayoutToUser = userService.assignLayoutToUser(user);
+		return new ResponseEntity<>(assignLayoutToUser, HttpStatus.CREATED);
+	}
+	
+	@PutMapping
+	public ResponseEntity<UserLayout> update(@RequestBody UserLayout user){
+		UserLayout updateLayout = userService.updateLayout(user);
+		return new ResponseEntity<>(updateLayout, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/{userId}/{groupId}")
+	public ResponseEntity<UserLayout> getUserById(@PathVariable Integer userId, @PathVariable Integer groupId){
+		UserLayout userById = userService.getUserById(userId, groupId);
+		return new ResponseEntity<>(userById, HttpStatus.OK);
+	}
+}
+//public UserLayout assignLayoutToUser(UserLayout user);
+//public UserLayout updateLayout(UserLayout user);
+//public UserLayout getUserById(Integer userId, Integer groupId);
+
